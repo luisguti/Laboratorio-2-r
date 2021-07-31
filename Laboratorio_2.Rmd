@@ -96,4 +96,17 @@ precip_delay
 ggplot(precip_delay, aes(x=precip, y=delay)) +
   geom_point()
 ```
- 2.6. Fligh
+ 2.6. Filter
+ 
+```{r}
+flights_airports <- flights %>%
+  filter(year == 2013) %>%
+  filter(month == 5) %>%
+  filter(day == 10) %>%
+  group_by(dest) %>%
+  summarize(delay = mean(arr_delay, na.rm=TRUE)) %>%
+  inner_join(airports, by = c("dest"="faa"))
+
+flights_airports
+```
+ 
