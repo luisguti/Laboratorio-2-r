@@ -110,3 +110,16 @@ flights_airports <- flights %>%
 flights_airports
 ```
  
+2.7. Gráfica de puntos
+```{r}
+ggplot(flights_airports, aes(x=lon, y=lat)) +
+  geom_point()
+```
+2.8. Inner Join
+```{r}
+flights %>%
+  inner_join(planes, by = "tailnum", suffix = c("_flights","_planes")) %>%
+  transmute(tailnum, manufacturer, pi = (dep_delay + arr_delay) / air_time)
+
+```
+
